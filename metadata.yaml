@@ -1,3 +1,5 @@
 homepage: "https://www.piano.io"
 documentation: "https://developers.atinternet-solutions.com/piano-analytics/"
 versions:
+  - sha: 7e3eb93927353ccd1fc4dd7d37bdd30a78af3f5c
+    changeNotes: Initial release.
