@@ -240,7 +240,7 @@ let confObject = {};
 confObject.collectDomain = data.collectDomain;
 confObject.site = data.site;
 confObject.privacyDefaultMode = data.privacyDefaultMode || 'optin';
-const otherConf = makeTableMap(data.confTable, 'confKey', 'confValue') || {};
+const otherConf = (data.confTable) ? makeTableMap(data.confTable, 'confKey', 'confValue') : {};
 
 let privacyArray = [];
 const privacyStorageActions = data.privacyStorageActions || [];
