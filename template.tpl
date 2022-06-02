@@ -35,7 +35,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "REGEX",
         "args": [
-          "http[s]?:\\/\\/([a-z0-9\\.]+)$"
+          "http[s]?:\\/\\/([a-z0-9\\.\\-]+)$"
         ]
       }
     ],
