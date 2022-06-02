@@ -1,6 +1,8 @@
 homepage: "https://www.piano.io"
 documentation: "https://developers.atinternet-solutions.com/piano-analytics/"
 versions:
+  - sha: 83e9a1a90b7212b8390323facee45a686437da6b
+    changeNotes: Allow `-` in collectDomain regex
   - sha: 653c5830dd5303edd0c1dbcd3c3b5c2151076108
     changeNotes: Fix empty confTable
   - sha: b844fa8373f1e82cf37bdb30363e35ed39f99665
