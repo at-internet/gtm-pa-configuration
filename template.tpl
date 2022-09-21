@@ -232,9 +232,10 @@ ___TEMPLATE_PARAMETERS___
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
 const log = require('logToConsole');
+const JSON = require('JSON');
 const makeTableMap = require('makeTableMap');
 
-log('GTM Piano Analytics Tag Template - Config Data =', data);
+log('GTM Piano Analytics Config Template - Config Data =', data);
 
 let confObject = {};
 confObject.collectDomain = data.collectDomain;
@@ -251,7 +252,10 @@ for (var privacyStorage of privacyStorageActions) { privacyArray.push([privacySt
 for (var privacyEvent of privacyEventActions) { privacyArray.push([privacyEvent.privacyEventAction, privacyEvent.privacyEventKey, privacyEvent.privacyEventMode]); }
 for (var privacyProp of privacyPropActions) { privacyArray.push([privacyProp.privacyPropAction, privacyProp.privacyPropKey, privacyProp.privacyPropMode, privacyProp.privacyPropEvent]); }
 
-for (var conf in otherConf) { confObject[conf] = otherConf[conf]; }
+const keyToParse = ['campaignPrefix'];
+for (var conf in otherConf) {
+  confObject[conf] = (keyToParse.indexOf(conf) > -1) ? JSON.parse(otherConf[conf]) : otherConf[conf];
+}
 confObject.privacy = privacyArray;
 
 return confObject;
