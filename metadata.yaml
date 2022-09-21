@@ -1,6 +1,8 @@
 homepage: "https://www.piano.io"
 documentation: "https://developers.atinternet-solutions.com/piano-analytics/"
 versions:
+  - sha: 664ab4f45008f538f1ccf98790fdd0b83495a754
+    changeNotes: Manage campaignPrefix configuration key (array)
   - sha: 83e9a1a90b7212b8390323facee45a686437da6b
     changeNotes: Allow `-` in collectDomain regex
   - sha: 653c5830dd5303edd0c1dbcd3c3b5c2151076108
