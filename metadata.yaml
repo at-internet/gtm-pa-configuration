@@ -1,6 +1,8 @@
 homepage: "https://www.piano.io"
 documentation: "https://developers.atinternet-solutions.com/piano-analytics/"
 versions:
+  - sha: 082ccbc7f8778776e94382f3e67a4aca405449f8
+    changeNotes: Manage queueVarName configuration key
   - sha: 664ab4f45008f538f1ccf98790fdd0b83495a754
     changeNotes: Manage campaignPrefix configuration key (array)
   - sha: 83e9a1a90b7212b8390323facee45a686437da6b
