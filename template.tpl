@@ -14,7 +14,9 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "Piano Analytics - Configuration",
-  "categories": ["ANALYTICS"],
+  "categories": [
+    "ANALYTICS"
+  ],
   "description": "Piano Analytics configuration variable. To be used with Piano Analytics tag template.",
   "containerContexts": [
     "WEB"
@@ -60,6 +62,24 @@ ___TEMPLATE_PARAMETERS___
     "displayName": "Privacy default mode",
     "simpleValueType": true,
     "defaultValue": "optin"
+  },
+  {
+    "type": "RADIO",
+    "name": "queueVarName",
+    "displayName": "Queue variable name",
+    "radioItems": [
+      {
+        "value": "_paq",
+        "displayValue": "_paq"
+      },
+      {
+        "value": "_paqueue",
+        "displayValue": "_paqueue",
+        "help": "Use this one if you have any conflict"
+      }
+    ],
+    "simpleValueType": true,
+    "defaultValue": "_paq"
   },
   {
     "type": "SIMPLE_TABLE",
@@ -241,6 +261,7 @@ let confObject = {};
 confObject.collectDomain = data.collectDomain;
 confObject.site = data.site;
 confObject.privacyDefaultMode = data.privacyDefaultMode || 'optin';
+confObject.queueVarName = data.queueVarName || '_paq';
 const otherConf = (data.confTable) ? makeTableMap(data.confTable, 'confKey', 'confValue') : {};
 
 let privacyArray = [];
