@@ -37,7 +37,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "REGEX",
         "args": [
-          "http[s]?:\\/\\/([a-z0-9\\.]+)$"
+          "http[s]?:\\/\\/([a-z0-9\\.\\-]+)$"
         ]
       },
       {
@@ -92,6 +92,24 @@ ___TEMPLATE_PARAMETERS___
     "simpleValueType": true,
     "defaultValue": "opt-in",
     "help": "If you updated from a previous version of the template, you need to empty the default privacy mode."
+  },
+  {
+    "type": "RADIO",
+    "name": "queueVarName",
+    "displayName": "Queue variable name",
+    "radioItems": [
+      {
+        "value": "_paq",
+        "displayValue": "_paq"
+      },
+      {
+        "value": "_paqueue",
+        "displayValue": "_paqueue",
+        "help": "Use this one if you have any conflict"
+      }
+    ],
+    "simpleValueType": true,
+    "defaultValue": "_paq"
   },
   {
     "type": "SIMPLE_TABLE",
