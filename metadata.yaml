@@ -1,6 +1,11 @@
 homepage: "https://www.piano.io"
 documentation: "https://developers.atinternet-solutions.com/piano-analytics/"
 versions:
+  - sha: 628b1134d5818b5981c0763b6df593db757397f3
+    changeNotes: |2
+      Add consent feature management
+      Fix some configuration type not casted
+      Deprecate Privacy feature
   - sha: 082ccbc7f8778776e94382f3e67a4aca405449f8
     changeNotes: Manage queueVarName configuration key
   - sha: 664ab4f45008f538f1ccf98790fdd0b83495a754
