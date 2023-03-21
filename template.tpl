@@ -406,7 +406,7 @@ for (var privacyProp of privacyPropActions) { privacyArray.push([privacyProp.pri
 
 const keyToParse = ['campaignPrefix', 'cookieSecure', 'encodeStorageBase64', 'isVisitorClientSide', 'sendEventWhenOptout', 'enableUTMTracking'];
 for (var conf in otherConf) {
-  confObject[conf] = (keyToParse.indexOf(conf) > -1) ? JSON.parse(otherConf[conf]) : otherConf[conf];
+  confObject[conf] = (keyToParse.indexOf(conf) > -1 && typeof otherConf[conf] === 'string') ? JSON.parse(otherConf[conf]) : otherConf[conf];
 }
 confObject.privacy = privacyArray;
 
