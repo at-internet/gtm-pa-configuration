@@ -1,6 +1,8 @@
 homepage: "https://www.piano.io"
 documentation: "https://developers.atinternet-solutions.com/piano-analytics/"
 versions:
+  - sha: f16ab8fb4610dae04d1e64b6895e7de67effcc79
+    changeNotes: Allow configuration values to be JS variables
   - sha: 628b1134d5818b5981c0763b6df593db757397f3
     changeNotes: |2
       Add consent feature management
