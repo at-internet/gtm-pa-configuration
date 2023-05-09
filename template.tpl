@@ -1,4 +1,4 @@
-﻿___TERMS_OF_SERVICE___
+___TERMS_OF_SERVICE___
 
 By creating or modifying this file you agree to Google Tag Manager's Community
 Template Gallery Developer Terms of Service available at
@@ -92,6 +92,14 @@ ___TEMPLATE_PARAMETERS___
     "simpleValueType": true,
     "defaultValue": "opt-in",
     "help": "If you updated from a previous version of the template, you need to empty the default privacy mode."
+  },
+  {
+    "type": "TEXT",
+    "name": "cookieDomain",
+    "displayName": "Domaine du cookie",
+    "simpleValueType": true,
+    "valueHint": ".mysite.com",
+    "help": "Use .notation with multi domain websites, ignore otherwise"
   },
   {
     "type": "RADIO",
@@ -376,6 +384,7 @@ confObject.collectDomain = data.collectDomain;
 confObject.site = data.site;
 confObject.sdkSrc = data.sdkSrc || "https://tag.aticdn.net/piano-analytics.js";
 confObject.privacyDefaultMode = data.privacyDefaultMode || '';
+confObject.cookieDomain = data.cookieDomain || '';
 confObject.consentDefaultMode = data.consentDefaultMode || 'opt-in';
 confObject.queueVarName = data.queueVarName || '_paq';
 const otherConf = (data.confTable) ? makeTableMap(data.confTable, 'confKey', 'confValue') : {};
