@@ -196,7 +196,8 @@ ___TEMPLATE_PARAMETERS___
         "defaultValue": "",
         "displayName": "Value",
         "name": "confValue",
-        "type": "TEXT"
+        "type": "TEXT",
+        "valueHint": "Array values must be JSON valid: [\"value\"]"
       }
     ],
     "help": "Documentation \u003ca href\u003d\"https://developers.atinternet-solutions.com/piano-analytics/data-collection/sdks/javascript#configuration\"\u003eavailable here\u003c/a\u003e",
