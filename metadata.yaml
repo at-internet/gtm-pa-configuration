@@ -1,6 +1,8 @@
 homepage: "https://www.piano.io"
 documentation: "https://developers.atinternet-solutions.com/piano-analytics/"
 versions:
+  - sha: de361251e24032c88635e9f4b011a843791f2bb7
+    changeNotes: Complete configuration keys to parse
   - sha: f42f4f501ac4a644c77a068157c1439aa45d711c
     changeNotes: Add hint for configuration value
   - sha: f16ab8fb4610dae04d1e64b6895e7de67effcc79
