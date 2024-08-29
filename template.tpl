@@ -388,7 +388,7 @@ const privacyPropActions = data.privacyPropActions || [];
 
 let pdlObject = {};
 if((confObject.privacyDefaultMode === '' && confObject.consentDefaultMode !== '') || data.consentItems) {
-  pdlObject.requireConsent = true;
+  pdlObject.requireConsent = 'v2';
   pdlObject.consent = { defaultPreset: { PA: confObject.consentDefaultMode} };
 }
 if(data.consentItems) {
