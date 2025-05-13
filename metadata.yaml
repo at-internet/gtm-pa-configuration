@@ -1,6 +1,8 @@
 homepage: "https://www.piano.io"
 documentation: "https://developers.atinternet-solutions.com/piano-analytics/"
 versions:
+  - sha: 349d59816d803926055465162dac0f3d89dff3d0
+    changeNotes: Fix Privacy usage with 6.16.0+
   - sha: 79550caf24eb028f9f1b4471ce3b657ad154a6b4
     changeNotes: Manage consent v2
   - sha: de361251e24032c88635e9f4b011a843791f2bb7
