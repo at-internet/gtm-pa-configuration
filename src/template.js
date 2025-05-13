@@ -1,6 +1,7 @@
 const log = require('logToConsole');
 const JSON = require('JSON');
 const makeTableMap = require('makeTableMap');
+const Object = require('Object');
 
 log('GTM Piano Analytics Config Template - Config Data =', data);
 
@@ -32,6 +33,7 @@ if(data.consentItems) {
   });
 }
 if(pdlObject !== {}) confObject.pdlObject = pdlObject;
+Object.delete(confObject, "consentDefaultMode");
 
 for (var privacyStorage of privacyStorageActions) { privacyArray.push([privacyStorage.privacyStorageAction, privacyStorage.privacyStorageKey, privacyStorage.privacyStorageMode]); }
 for (var privacyEvent of privacyEventActions) { privacyArray.push([privacyEvent.privacyEventAction, privacyEvent.privacyEventKey, privacyEvent.privacyEventMode]); }
