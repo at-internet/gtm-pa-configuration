@@ -32,6 +32,10 @@ if(data.consentItems) {
     pdlObject.consent_items.PA[item.consentItemType][item.consentItemKey] = item.consentItemPriority;
   });
 }
+if(data.consentProducts) {
+  pdlObject.consent = pdlObject.consent || {};
+  pdlObject.consent.products = data.consentProducts.map(item => item.productName);
+}
 if(pdlObject !== {}) confObject.pdlObject = pdlObject;
 Object.delete(confObject, "consentDefaultMode");
 

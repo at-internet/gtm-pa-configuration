@@ -182,6 +182,27 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "SIMPLE_TABLE",
+    "name": "consentProducts",
+    "displayName": "Consent Products",
+    "simpleTableColumns": [
+      {
+        "defaultValue": "",
+        "displayName": "Product Name",
+        "name": "productName",
+        "type": "TEXT",
+        "isUnique": true,
+        "valueValidators": [
+          {
+            "type": "NON_EMPTY"
+          }
+        ]
+      }
+    ],
+    "help": "List of products to be added to window.pdl.consent.products for consent management.",
+    "newRowButtonText": "Add product"
+  },
+  {
+    "type": "SIMPLE_TABLE",
     "name": "confTable",
     "displayName": "Other configurations",
     "simpleTableColumns": [
@@ -399,6 +420,10 @@ if(data.consentItems) {
     pdlObject.consent_items.PA[item.consentItemType] = pdlObject.consent_items.PA[item.consentItemType] || {};
     pdlObject.consent_items.PA[item.consentItemType][item.consentItemKey] = item.consentItemPriority;
   });
+}
+if(data.consentProducts) {
+  pdlObject.consent = pdlObject.consent || {};
+  pdlObject.consent.products = data.consentProducts.map(item => item.productName);
 }
 if(pdlObject !== {}) confObject.pdlObject = pdlObject;
 Object.delete(confObject, "consentDefaultMode");
