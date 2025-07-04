@@ -32,6 +32,10 @@ if(data.consentItems) {
     pdlObject.consent_items.PA[item.consentItemType][item.consentItemKey] = item.consentItemPriority;
   });
 }
+if(data.consentProducts) {
+  pdlObject.consent = pdlObject.consent || {};
+  pdlObject.consent.products = data.consentProducts.map(item => item.productName);
+}
 if(pdlObject !== {}) confObject.pdlObject = pdlObject;
 Object.delete(confObject, "consentDefaultMode");
 
@@ -39,7 +43,7 @@ for (var privacyStorage of privacyStorageActions) { privacyArray.push([privacySt
 for (var privacyEvent of privacyEventActions) { privacyArray.push([privacyEvent.privacyEventAction, privacyEvent.privacyEventKey, privacyEvent.privacyEventMode]); }
 for (var privacyProp of privacyPropActions) { privacyArray.push([privacyProp.privacyPropAction, privacyProp.privacyPropKey, privacyProp.privacyPropMode, privacyProp.privacyPropEvent]); }
 
-const keyToParse = ['campaignPrefix', 'cookieSecure', 'encodeStorageBase64', 'isVisitorClientSide', 'sendEventWhenOptout', 'enableUTMTracking', 'sendEmptyProperties', 'enableAutomaticPageRefresh', 'allowHighEntropyClientHints', 'enableExtendedOptout'];
+const keyToParse = ['campaignPrefix', 'cookieSecure', 'encodeStorageBase64', 'isVisitorClientSide', 'sendEventWhenOptout', 'enableUTMTracking', 'sendEmptyProperties', 'enableAutomaticPageRefresh', 'allowHighEntropyClientHints', 'enableExtendedOptout', 'instantTracking'];
 for (var conf in otherConf) {
   confObject[conf] = (keyToParse.indexOf(conf) > -1 && typeof otherConf[conf] === 'string') ? JSON.parse(otherConf[conf]) : otherConf[conf];
 }

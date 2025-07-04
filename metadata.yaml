@@ -1,6 +1,11 @@
 homepage: "https://www.piano.io"
 documentation: "https://developers.atinternet-solutions.com/piano-analytics/"
 versions:
+  - sha: af8b9cd77e19a1f8ac7429d94601a071624df859
+    changeNotes: |2
+      Add consent Products list
+      Add instantTracking configuration casting
+      Remove uniqueness for consent items
   - sha: 349d59816d803926055465162dac0f3d89dff3d0
     changeNotes: Fix Privacy usage with 6.16.0+
   - sha: 79550caf24eb028f9f1b4471ce3b657ad154a6b4
