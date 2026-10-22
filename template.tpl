@@ -45,7 +45,7 @@ ___TEMPLATE_PARAMETERS___
       }
     ],
     "valueHint": "https://",
-    "help": "Documentation \u003ca href\u003d\"https://developers.atinternet-solutions.com/piano-analytics/data-collection/general/collection-methods\"\u003eavailable here\u003c/a\u003e"
+    "help": "Documentation \u003ca href\u003d\"https://developers.piano.io/analytics/data-collection/general/collection-methods\"\u003eavailable here\u003c/a\u003e"
   },
   {
     "type": "TEXT",
@@ -68,7 +68,7 @@ ___TEMPLATE_PARAMETERS___
     "displayName": "PA SDK source URL",
     "simpleValueType": true,
     "defaultValue": "https://tag.aticdn.net/piano-analytics.js",
-    "help": "Enter PA SDK source file to use. You can use a self-hosted file, or \u003ca href\u003d\"https://developers.atinternet-solutions.com/piano-analytics/data-collection/sdks/javascript#cdn\" target\u003d\"_blank\"\u003eone available on PA CDN\u003c/a\u003e."
+    "help": "Enter PA SDK source file to use. Default CDN: \u003ca href\u003d\"https://developers.piano.io/analytics/data-collection/sdks/javascript#cdn\" target\u003d\"_blank\"\u003etag.aticdn.net\u003c/a\u003e. URLs outside https://tag.aticdn.net/ are not injected by the tag template (GTM gallery permissions). For a first-party or CDDC URL, load the script from the page or a Custom HTML tag, and keep that URL here so the tag uses the matching configuration."
   },
   {
     "type": "SELECT",
@@ -221,7 +221,7 @@ ___TEMPLATE_PARAMETERS___
         "valueHint": "Array values must be JSON valid: [\"value\"]"
       }
     ],
-    "help": "Documentation \u003ca href\u003d\"https://developers.atinternet-solutions.com/piano-analytics/data-collection/sdks/javascript#configuration\"\u003eavailable here\u003c/a\u003e",
+    "help": "Documentation \u003ca href\u003d\"https://developers.piano.io/analytics/data-collection/sdks/javascript#configuration\"\u003eavailable here\u003c/a\u003e",
     "newRowButtonText": "Add configuration"
   },
   {

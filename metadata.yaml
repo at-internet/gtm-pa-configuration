@@ -1,5 +1,5 @@
 homepage: "https://www.piano.io"
-documentation: "https://developers.atinternet-solutions.com/piano-analytics/"
+documentation: "https://developers.piano.io/analytics/"
 versions:
   - sha: af8b9cd77e19a1f8ac7429d94601a071624df859
     changeNotes: |2
