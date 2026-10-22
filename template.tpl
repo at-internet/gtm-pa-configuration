@@ -45,7 +45,7 @@ ___TEMPLATE_PARAMETERS___
       }
     ],
     "valueHint": "https://",
-    "help": "Documentation \u003ca href\u003d\"https://developers.atinternet-solutions.com/piano-analytics/data-collection/general/collection-methods\"\u003eavailable here\u003c/a\u003e"
+    "help": "Documentation \u003ca href\u003d\"https://developers.piano.io/analytics/data-collection/general/collection-methods\"\u003eavailable here\u003c/a\u003e"
   },
   {
     "type": "TEXT",
@@ -68,7 +68,7 @@ ___TEMPLATE_PARAMETERS___
     "displayName": "PA SDK source URL",
     "simpleValueType": true,
     "defaultValue": "https://tag.aticdn.net/piano-analytics.js",
-    "help": "Enter PA SDK source file to use. You can use a self-hosted file, or \u003ca href\u003d\"https://developers.atinternet-solutions.com/piano-analytics/data-collection/sdks/javascript#cdn\" target\u003d\"_blank\"\u003eone available on PA CDN\u003c/a\u003e."
+    "help": "Enter PA SDK source file to use. Default CDN: \u003ca href\u003d\"https://developers.piano.io/analytics/data-collection/sdks/javascript#cdn\" target\u003d\"_blank\"\u003etag.aticdn.net\u003c/a\u003e. URLs outside https://tag.aticdn.net/ are not injected by the tag template (GTM gallery permissions). For a first-party or CDDC URL, load the script from the page or a Custom HTML tag, and keep that URL here so the tag uses the matching configuration."
   },
   {
     "type": "SELECT",
@@ -221,7 +221,7 @@ ___TEMPLATE_PARAMETERS___
         "valueHint": "Array values must be JSON valid: [\"value\"]"
       }
     ],
-    "help": "Documentation \u003ca href\u003d\"https://developers.atinternet-solutions.com/piano-analytics/data-collection/sdks/javascript#configuration\"\u003eavailable here\u003c/a\u003e",
+    "help": "Documentation \u003ca href\u003d\"https://developers.piano.io/analytics/data-collection/sdks/javascript#configuration\"\u003eavailable here\u003c/a\u003e",
     "newRowButtonText": "Add configuration"
   },
   {
@@ -470,7 +470,152 @@ ___WEB_PERMISSIONS___
 
 ___TESTS___
 
-scenarios: []
+scenarios:
+- name: Defaults produce CDN sdkSrc, queue, and consent v2 opt-in
+  code: |-
+    const result = runCode({
+      collectDomain: 'https://analytics.piano.io',
+      site: '123456'
+    });
+
+    assertThat(result.collectDomain).isEqualTo('https://analytics.piano.io');
+    assertThat(result.site).isEqualTo('123456');
+    assertThat(result.sdkSrc).isEqualTo('https://tag.aticdn.net/piano-analytics.js');
+    assertThat(result.queueVarName).isEqualTo('_paq');
+    assertThat(result.privacyDefaultMode).isEqualTo('');
+    assertThat(result.privacy).isEqualTo([]);
+    assertThat(result.consentDefaultMode).isUndefined();
+    assertThat(result.pdlObject.requireConsent).isEqualTo('v2');
+    assertThat(result.pdlObject.consent).isEqualTo({
+      defaultPreset: { PA: 'opt-in' }
+    });
+
+- name: Explicit values override defaults
+  code: |-
+    const result = runCode({
+      collectDomain: 'https://collect.example.com',
+      site: '999',
+      sdkSrc: 'https://nox.example.com/piano-analytics.js',
+      queueVarName: '_paqueue',
+      consentDefaultMode: 'essential'
+    });
+
+    assertThat(result.sdkSrc).isEqualTo('https://nox.example.com/piano-analytics.js');
+    assertThat(result.queueVarName).isEqualTo('_paqueue');
+    assertThat(result.pdlObject.consent.defaultPreset.PA).isEqualTo('essential');
+    assertThat(result.consentDefaultMode).isUndefined();
+
+- name: Consent items are grouped under consent_items.PA
+  code: |-
+    const result = runCode({
+      collectDomain: 'https://analytics.piano.io',
+      site: '123456',
+      consentItems: [
+        {consentItemType: 'properties', consentItemKey: 'user_id', consentItemPriority: 'optional'},
+        {consentItemType: 'events', consentItemKey: 'page.display', consentItemPriority: 'essential'},
+        {consentItemType: 'cookies', consentItemKey: 'pa_vid', consentItemPriority: 'mandatory'},
+        {consentItemType: 'properties', consentItemKey: 'page', consentItemPriority: 'essential'}
+      ]
+    });
+
+    assertThat(result.pdlObject.requireConsent).isEqualTo('v2');
+    assertThat(result.pdlObject.consent_items.PA).isEqualTo({
+      properties: {
+        user_id: 'optional',
+        page: 'essential'
+      },
+      events: {
+        'page.display': 'essential'
+      },
+      cookies: {
+        pa_vid: 'mandatory'
+      }
+    });
+
+- name: Consent products fill consent.products
+  code: |-
+    const result = runCode({
+      collectDomain: 'https://analytics.piano.io',
+      site: '123456',
+      consentDefaultMode: 'opt-in',
+      consentProducts: [
+        {productName: 'PA'},
+        {productName: 'AM'}
+      ]
+    });
+
+    assertThat(result.pdlObject.consent.defaultPreset.PA).isEqualTo('opt-in');
+    assertThat(result.pdlObject.consent.products).isEqualTo(['PA', 'AM']);
+
+- name: confTable casts known keys and leaves unknown as string
+  code: |-
+    const result = runCode({
+      collectDomain: 'https://analytics.piano.io',
+      site: '123456',
+      confTable: [
+        {confKey: 'instantTracking', confValue: 'true'},
+        {confKey: 'cookieSecure', confValue: 'false'},
+        {confKey: 'campaignPrefix', confValue: '["at_","utm_"]'},
+        {confKey: 'customKey', confValue: 'plain'}
+      ]
+    });
+
+    assertThat(result.instantTracking).isEqualTo(true);
+    assertThat(result.cookieSecure).isEqualTo(false);
+    assertThat(result.campaignPrefix).isEqualTo(['at_', 'utm_']);
+    assertThat(result.customKey).isEqualTo('plain');
+
+- name: Missing confTable does not add extra keys
+  code: |-
+    const result = runCode({
+      collectDomain: 'https://analytics.piano.io',
+      site: '123456'
+    });
+
+    assertThat(result.instantTracking).isUndefined();
+    assertThat(result.campaignPrefix).isUndefined();
+    assertThat(result.privacy).isEqualTo([]);
+
+- name: Non-string confTable values are not JSON.parsed
+  code: |-
+    const result = runCode({
+      collectDomain: 'https://analytics.piano.io',
+      site: '123456',
+      confTable: [
+        {confKey: 'instantTracking', confValue: true},
+        {confKey: 'campaignPrefix', confValue: ['x']}
+      ]
+    });
+
+    assertThat(result.instantTracking).isEqualTo(true);
+    assertThat(result.campaignPrefix).isEqualTo(['x']);
+
+- name: Privacy legacy tables become privacy tuples and still return empty pdlObject
+  code: |-
+    const result = runCode({
+      collectDomain: 'https://analytics.piano.io',
+      site: '123456',
+      privacyDefaultMode: 'optout',
+      consentDefaultMode: '',
+      privacyStorageActions: [
+        {privacyStorageAction: 'include.storageKey', privacyStorageKey: 'pa_vid', privacyStorageMode: 'optout'}
+      ],
+      privacyEventActions: [
+        {privacyEventAction: 'include.event', privacyEventKey: 'page.display', privacyEventMode: 'optout'}
+      ],
+      privacyPropActions: [
+        {privacyPropAction: 'include.property', privacyPropKey: 'page', privacyPropMode: 'optout', privacyPropEvent: '*'}
+      ]
+    });
+
+    assertThat(result.privacyDefaultMode).isEqualTo('optout');
+    assertThat(result.pdlObject.requireConsent).isUndefined();
+    assertThat(result.pdlObject).isEqualTo({});
+    assertThat(result.privacy).isEqualTo([
+      ['include.storageKey', 'pa_vid', 'optout'],
+      ['include.event', 'page.display', 'optout'],
+      ['include.property', 'page', 'optout', '*']
+    ]);
 
 
 ___NOTES___
