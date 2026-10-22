@@ -1,6 +1,8 @@
 homepage: "https://www.piano.io"
 documentation: "https://developers.piano.io/analytics/"
 versions:
+  - sha: 34843e06cc572c70d227c77468736586979d18c5
+    changeNotes: Clarify SDK source help for CDDC or self-hosted SDK
   - sha: af8b9cd77e19a1f8ac7429d94601a071624df859
     changeNotes: |2
       Add consent Products list
