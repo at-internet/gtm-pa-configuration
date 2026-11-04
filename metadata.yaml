@@ -1,6 +1,8 @@
 homepage: "https://www.piano.io"
 documentation: "https://developers.piano.io/analytics/"
 versions:
+  - sha: a0d52c4ef33f9a2f3e20aff654ee8873f7e6526c
+    changeNotes: Fix invalid characters in template test names
   - sha: 2a2fd8cc314449a4aa2b939740a7695e31a656c5
     changeNotes: Add template tests for configuration, consent, and privacy
   - sha: 34843e06cc572c70d227c77468736586979d18c5
