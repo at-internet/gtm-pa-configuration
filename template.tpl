@@ -505,7 +505,7 @@ scenarios:
     assertThat(result.pdlObject.consent.defaultPreset.PA).isEqualTo('essential');
     assertThat(result.consentDefaultMode).isUndefined();
 
-- name: Consent items are grouped under consent_items.PA
+- name: Consent items are grouped under consent_items PA
   code: |-
     const result = runCode({
       collectDomain: 'https://analytics.piano.io',
@@ -532,7 +532,7 @@ scenarios:
       }
     });
 
-- name: Consent products fill consent.products
+- name: Consent products fill consent products
   code: |-
     const result = runCode({
       collectDomain: 'https://analytics.piano.io',
@@ -576,7 +576,7 @@ scenarios:
     assertThat(result.campaignPrefix).isUndefined();
     assertThat(result.privacy).isEqualTo([]);
 
-- name: Non-string confTable values are not JSON.parsed
+- name: Non-string confTable values are not JSON parsed
   code: |-
     const result = runCode({
       collectDomain: 'https://analytics.piano.io',
